@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeonVault Casino — Play & Win</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">♠</span>
+        <span class="logo-text">Neon<strong>Vault</strong></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#" class="active">Casino</a></li>
+        <li><a href="#">Live Casino</a></li>
+        <li><a href="#">Sports</a></li>
+        <li><a href="#">Promotions</a></li>
+        <li><a href="#">VIP</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn btn-ghost" onclick="openModal('login')">Log In</button>
+        <button class="btn btn-primary" onclick="openModal('register')">Register</button>
+      </div>
+
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#">Casino</a>
+      <a href="#">Live Casino</a>
+      <a href="#">Sports</a>
+      <a href="#">Promotions</a>
+      <a href="#">VIP</a>
+      <div class="mobile-actions">
+        <button class="btn btn-ghost" onclick="openModal('login')">Log In</button>
+        <button class="btn btn-primary" onclick="openModal('register')">Register</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO BANNER ===== -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-particles" id="particles"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">🎁 Welcome Bonus</div>
+      <h1 class="hero-title">Get Up To <span class="highlight">$5,000</span><br/>On Your First 3 Deposits</h1>
+      <p class="hero-sub">Plus 200 Free Spins — No Wagering Restrictions on Day 1</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-xl" onclick="openModal('register')">Claim Bonus</button>
+        <button class="btn btn-ghost btn-xl">Learn More</button>
+      </div>
+      <div class="hero-trust">
+        <span>🔒 SSL Secured</span>
+        <span>⚡ Instant Payouts</span>
+        <span>🏆 Licensed & Regulated</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="floating-card card-1">🎰</div>
+        <div class="floating-card card-2">🃏</div>
+        <div class="floating-card card-3">🎲</div>
+        <div class="jackpot-display">
+          <div class="jackpot-label">MEGA JACKPOT</div>
+          <div class="jackpot-amount" id="jackpotAmount">$4,821,307</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROMO STRIP ===== -->
+  <section class="promo-strip">
+    <div class="promo-scroll">
+      <div class="promo-item">🎰 500+ Slot Games</div>
+      <div class="promo-item">🃏 Live Blackjack Tables</div>
+      <div class="promo-item">🎡 Roulette Available 24/7</div>
+      <div class="promo-item">💎 VIP Program — Up to 20% Cashback</div>
+      <div class="promo-item">⚡ Withdrawals in Under 1 Hour</div>
+      <div class="promo-item">🔐 Crypto Payments Accepted</div>
+      <!-- Duplicated for seamless loop -->
+      <div class="promo-item">🎰 500+ Slot Games</div>
+      <div class="promo-item">🃏 Live Blackjack Tables</div>
+      <div class="promo-item">🎡 Roulette Available 24/7</div>
+      <div class="promo-item">💎 VIP Program — Up to 20% Cashback</div>
+      <div class="promo-item">⚡ Withdrawals in Under 1 Hour</div>
+      <div class="promo-item">🔐 Crypto Payments Accepted</div>
+    </div>
+  </section>
+
+  <!-- ===== GAME LOBBY ===== -->
+  <section class="lobby" id="lobby">
+    <div class="container">
+
+      <!-- Category Tabs -->
+      <div class="tabs">
+        <button class="tab active" data-tab="all" onclick="filterGames(this)">🎮 All Games</button>
+        <button class="tab" data-tab="slots" onclick="filterGames(this)">🎰 Slots</button>
+        <button class="tab" data-tab="live" onclick="filterGames(this)">📹 Live Casino</button>
+        <button class="tab" data-tab="table" onclick="filterGames(this)">🃏 Table Games</button>
+        <button class="tab" data-tab="jackpot" onclick="filterGames(this)">💰 Jackpots</button>
+        <button class="tab" data-tab="new" onclick="filterGames(this)">✨ New</button>
+      </div>
+
+      <!-- Search + Filter -->
+      <div class="lobby-controls">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search games..." oninput="searchGames(this.value)" />
+        </div>
+        <div class="provider-filter">
+          <select onchange="filterByProvider(this.value)">
+            <option value="all">All Providers</option>
+            <option>NetEnt</option>
+            <option>Pragmatic Play</option>
+            <option>Evolution</option>
+            <option>Microgaming</option>
+            <option>Play'n GO</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Game Grid -->
+      <div class="game-grid" id="gameGrid">
+        <!-- Generated by JS -->
+      </div>
+
+      <div class="load-more-wrap">
+        <button class="btn btn-ghost btn-load" onclick="loadMoreGames()">Load More Games</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROMOTIONS ===== -->
+  <section class="promotions" id="promotions">
+    <div class="container">
+      <div class="section-header">
+        <h2>🎁 Promotions</h2>
+        <a href="#" class="see-all">See All →</a>
+      </div>
+      <div class="promo-grid">
+        <div class="promo-card promo-welcome">
+          <div class="promo-badge">HOT</div>
+          <div class="promo-icon">🎉</div>
+          <h3>Welcome Package</h3>
+          <p>$5,000 + 200 Free Spins across your first 3 deposits</p>
+          <button class="btn btn-primary" onclick="openModal('register')">Get Bonus</button>
+        </div>
+        <div class="promo-card promo-reload">
+          <div class="promo-badge">WEEKLY</div>
+          <div class="promo-icon">🔄</div>
+          <h3>Reload Monday</h3>
+          <p>50% reload bonus every Monday — up to $500</p>
+          <button class="btn btn-primary">Claim Now</button>
+        </div>
+        <div class="promo-card promo-cashback">
+          <div class="promo-badge">VIP</div>
+          <div class="promo-icon">💎</div>
+          <h3>Weekly Cashback</h3>
+          <p>Get up to 20% cashback on all losses every Friday</p>
+          <button class="btn btn-primary">Join VIP</button>
+        </div>
+        <div class="promo-card promo-tournament">
+          <div class="promo-badge">LIVE</div>
+          <div class="promo-icon">🏆</div>
+          <h3>Slot Tournament</h3>
+          <p>$50,000 prize pool — leaderboard resets every Sunday</p>
+          <button class="btn btn-primary">Enter Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LIVE CASINO HIGHLIGHT ===== -->
+  <section class="live-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>📹 Live Casino</h2>
+        <a href="#" class="see-all">See All →</a>
+      </div>
+      <div class="live-grid">
+        <div class="live-card" style="--accent: #e5b100">
+          <div class="live-badge">🔴 LIVE</div>
+          <div class="live-icon">🃏</div>
+          <div class="live-info">
+            <div class="live-name">Speed Blackjack</div>
+            <div class="live-players">423 playing</div>
+            <div class="live-limits">$1 — $5,000</div>
+          </div>
+        </div>
+        <div class="live-card" style="--accent: #7c3aed">
+          <div class="live-badge">🔴 LIVE</div>
+          <div class="live-icon">🎡</div>
+          <div class="live-info">
+            <div class="live-name">Lightning Roulette</div>
+            <div class="live-players">891 playing</div>
+            <div class="live-limits">$0.50 — $2,500</div>
+          </div>
+        </div>
+        <div class="live-card" style="--accent: #00d4a0">
+          <div class="live-badge">🔴 LIVE</div>
+          <div class="live-icon">🎴</div>
+          <div class="live-info">
+            <div class="live-name">Baccarat VIP</div>
+            <div class="live-players">217 playing</div>
+            <div class="live-limits">$10 — $50,000</div>
+          </div>
+        </div>
+        <div class="live-card" style="--accent: #f97316">
+          <div class="live-badge">🔴 LIVE</div>
+          <div class="live-icon">🎰</div>
+          <div class="live-info">
+            <div class="live-name">Crazy Time</div>
+            <div class="live-players">2,104 playing</div>
+            <div class="live-limits">$0.10 — $500</div>
+          </div>
+        </div>
+        <div class="live-card" style="--accent: #ec4899">
+          <div class="live-badge">🔴 LIVE</div>
+          <div class="live-icon">🎲</div>
+          <div class="live-info">
+            <div class="live-name">Sic Bo Live</div>
+            <div class="live-players">156 playing</div>
+            <div class="live-limits">$0.50 — $1,000</div>
+          </div>
+        </div>
+        <div class="live-card" style="--accent: #00b4f0">
+          <div class="live-badge">🔴 LIVE</div>
+          <div class="live-icon">🃏</div>
+          <div class="live-info">
+            <div class="live-name">Casino Hold'em</div>
+            <div class="live-players">389 playing</div>
+            <div class="live-limits">$1 — $10,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAYMENT METHODS ===== -->
+  <section class="payments">
+    <div class="container">
+      <h3 class="payments-title">Trusted Payment Methods</h3>
+      <div class="payment-icons">
+        <div class="payment-icon">₿ Bitcoin</div>
+        <div class="payment-icon">Ξ Ethereum</div>
+        <div class="payment-icon">💳 Visa</div>
+        <div class="payment-icon">💳 Mastercard</div>
+        <div class="payment-icon">🏦 Bank Wire</div>
+        <div class="payment-icon">📱 Skrill</div>
+        <div class="payment-icon">🅿️ PayPal</div>
+        <div class="payment-icon">💰 Neteller</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="logo-icon">♠</span>
+            <span class="logo-text">Neon<strong>Vault</strong></span>
+          </a>
+          <p>NeonVault is licensed and regulated under the laws of Curaçao. Gaming license #8048/JAZ. 18+ only.</p>
+          <div class="footer-badges">
+            <span class="badge">18+</span>
+            <span class="badge">🔒 SSL</span>
+            <span class="badge">✅ Licensed</span>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Casino</h4>
+          <ul>
+            <li><a href="#">Slots</a></li>
+            <li><a href="#">Live Casino</a></li>
+            <li><a href="#">Table Games</a></li>
+            <li><a href="#">Jackpots</a></li>
+            <li><a href="#">New Games</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Promotions</h4>
+          <ul>
+            <li><a href="#">Welcome Bonus</a></li>
+            <li><a href="#">Free Spins</a></li>
+            <li><a href="#">Reload Bonus</a></li>
+            <li><a href="#">VIP Program</a></li>
+            <li><a href="#">Tournaments</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Live Chat</a></li>
+            <li><a href="#">Responsible Gambling</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 NeonVault Casino. All rights reserved. Gambling can be addictive — play responsibly.</p>
+        <div class="footer-responsible">
+          <span>🎯 GamCare</span>
+          <span>🛡️ BeGambleAware</span>
+          <span>🔞 18+</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== MODALS ===== -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+
+      <!-- Login Form -->
+      <div class="modal-panel" id="loginPanel">
+        <h2>Welcome Back</h2>
+        <p class="modal-sub">Log in to your NeonVault account</p>
+        <form onsubmit="return false">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="you@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="••••••••" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Log In</button>
+          <p class="modal-switch">No account? <a onclick="switchModal('register')">Register</a></p>
+          <p class="modal-switch"><a href="#">Forgot password?</a></p>
+        </form>
+      </div>
+
+      <!-- Register Form -->
+      <div class="modal-panel hidden" id="registerPanel">
+        <h2>Create Account</h2>
+        <p class="modal-sub">Join NeonVault and claim your welcome bonus</p>
+        <form onsubmit="return false">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="John" />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="you@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Min. 8 characters" />
+          </div>
+          <div class="form-group">
+            <label>Promo Code (optional)</label>
+            <input type="text" placeholder="NEONVAULT" />
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="terms" />
+            <label for="terms">I agree to the <a href="#">Terms & Conditions</a> and confirm I am 18+</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Create Account & Claim Bonus</button>
+          <p class="modal-switch">Already a member? <a onclick="switchModal('login')">Log In</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LIVE CHAT BUTTON ===== -->
+  <button class="live-chat-btn" title="Live Support">
+    <span>💬</span>
+    <span class="chat-label">Support</span>
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>
